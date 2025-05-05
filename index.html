@@ -1,9 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prepa Anáhuac</title>
+  <link rel="stylesheet" href="styles.css" />
+  <!-- AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <!-- Swiper CSS -->
+<link
+rel="stylesheet"
+href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+/>
 
-<html>
-    <head>
-        <title>Raul lopez Ramirez </title>
-    </head>
-    <body>
-        <h1>Hello world</h1>
-    </body>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">Prepa Anáhuac</div>
+    <nav class="nav">
+      <ul>
+        <li>Nosotros</li>
+        <li>Experiencia</li>
+        <li>Campus</li>
+        <li>Admisiones</li>
+        <li>Blog</li>
+        <li>Hub</li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <section class="intro" data-aos="fade-right">
+      <h1><strong>BIENVENIDO A</strong><br><span class="anahuac">PREPA ANÁHUAC</span></h1>
+      <p>
+        Formamos a líderes como tú.<br>
+        Líderes que impactarán positivamente a la sociedad y en el mundo por medio de la innovación, creatividad, valores y Fe.
+      </p>
+      <button onclick="iniciarAdmisión()">INICIA TU PROCESO DE ADMISIÓN</button>
+      <h2 class="hashtag">#SEAMOSLÍDERES</h2>
+    </section>
+
+    <section class="galeria">
+      <img src="img/images.jpeg" alt="Estudiantes caminando" data-aos="zoom-in">
+      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes usando laptop" data-aos="zoom-in" data-aos-delay="100">
+      <img src="img/escuelas.jpg" alt="Estudiantes laboratorio" data-aos="zoom-in" data-aos-delay="200">
+      <img src="img/images (1).jpeg" alt="Estudiantes en viaje" data-aos="zoom-in" data-aos-delay="300">
+      <img src="img/escuelas.jpg" alt="Estudiantes en radio" data-aos="zoom-in" data-aos-delay="400">
+    </section>
+  </main>
+
+  <!-- JS personalizado -->
+  <script src="script.js"></script>
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init();
+  </script>
+</body>
 </html>
