@@ -4,7 +4,7 @@ function iniciarAdmisión() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".galeria img");
+  const images = document.querySelectorAll(".galeria-custom img");
 
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {

@@ -3,20 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Prepa Anáhuac</title>
+  <title>Prepa </title>
   <link rel="stylesheet" href="styles.css" />
+
   <!-- AOS CSS -->
   <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
   <!-- Swiper CSS -->
-<link
-rel="stylesheet"
-href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-/>
-
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
+
 <body>
   <header class="header">
-    <div class="logo">Prepa Anáhuac</div>
+    <img src="img/logo.png" alt="Logo de la escuela" class="logo-img" />
+    <div class="logo">Raul López Ramírez</div>
     <nav class="nav">
       <ul>
         <li>Nosotros</li>
@@ -27,11 +26,19 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
         <li>Hub</li>
       </ul>
     </nav>
+    <div class="social-links">
+      <a href="https://facebook.com" target="_blank">
+        <img src="img/facebook-icon.png" alt="Facebook" />
+      </a>
+      <a href="https://wa.me/5210000000000" target="_blank">
+        <img src="img/whatsapp-icon.png" alt="WhatsApp" />
+      </a>
+    </div>
   </header>
 
   <main class="hero">
     <section class="intro" data-aos="fade-right">
-      <h1><strong>BIENVENIDO A</strong><br><span class="anahuac">PREPA ANÁHUAC</span></h1>
+      <h1><strong>BIENVENIDO A</strong><br><span class="anahuac">RAUL LOPEZ RAMÍREZ</span></h1>
       <p>
         Formamos a líderes como tú.<br>
         Líderes que impactarán positivamente a la sociedad y en el mundo por medio de la innovación, creatividad, valores y Fe.
@@ -40,12 +47,15 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
       <h2 class="hashtag">#SEAMOSLÍDERES</h2>
     </section>
 
-    <section class="galeria">
-      <img src="img/images.jpeg" alt="Estudiantes caminando" data-aos="zoom-in">
-      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes usando laptop" data-aos="zoom-in" data-aos-delay="100">
-      <img src="img/escuelas.jpg" alt="Estudiantes laboratorio" data-aos="zoom-in" data-aos-delay="200">
-      <img src="img/images (1).jpeg" alt="Estudiantes en viaje" data-aos="zoom-in" data-aos-delay="300">
-      <img src="img/escuelas.jpg" alt="Estudiantes en radio" data-aos="zoom-in" data-aos-delay="400">
+    <!-- Galería tipo collage -->
+    <section class="galeria-custom">
+      <img src="img/images.jpeg" alt="Estudiantes caminando" class="img1" data-aos="zoom-in">
+      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes usando laptop" class="img2" data-aos="zoom-in" data-aos-delay="100">
+      <img src="img/escuelas.jpg" alt="Estudiantes laboratorio" class="img3" data-aos="zoom-in" data-aos-delay="200">
+      <img src="img/images (1).jpeg" alt="Estudiantes en viaje" class="img4" data-aos="zoom-in" data-aos-delay="300">
+      <img src="img/escuelas.jpg" alt="Estudiantes en radio" class="img5" data-aos="zoom-in" data-aos-delay="400">
+      <img src="img/images.jpeg" alt="Estudiantes biblioteca" class="img6" data-aos="zoom-in" data-aos-delay="500">
+      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes en clase" class="img7" data-aos="zoom-in" data-aos-delay="600">
     </section>
   </main>
 
@@ -57,5 +67,52 @@ href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
   <script>
     AOS.init();
   </script>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section logo">
+        <img src="img/logo.png" alt="Logo de la escuela" class="footer-logo" />
+        <h2>Cervantes</h2>
+        <p>Secundaria</p>
+      </div>
+  
+      <div class="footer-section">
+        <h3>NAVEGACIÓN RÁPIDA</h3>
+        <ul>
+          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Academia</a></li>
+          <li><a href="#">Alumnos</a></li>
+          <li><a href="#">Padres</a></li>
+          <li><a href="#">Noticias</a></li>
+          <li><a href="#">Eventos</a></li>
+          <li><a href="#">Admisiones</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section">
+        <h3>CONÉCTATE</h3>
+        <ul>
+          <li><a href="#">Facebook</a></li>
+          <li><a href="#">WhatsApp</a></li>
+        </ul>
+      </div>
+  
+      <div class="footer-section">
+        <h3>CONTÁCTANOS</h3>
+        <p>Av. Fray A. Alcalde 10</p>
+        <p>44100 Guad., Jal., México</p>
+        <p>Tel: +52-1-33-12345678</p>
+        <p>info@misitio.com</p>
+      </div>
+    </div>
+  
+    <div class="footer-bottom">
+      <p>
+        <a href="#">Términos y Condiciones</a> | <a href="#">Política de privacidad</a><br>
+        © 2035 Creado por Colegio Cervantes con <a href="https://www.wix.com">Wix.com</a>
+      </p>
+    </div>
+  </footer>
+  
 </body>
 </html>
