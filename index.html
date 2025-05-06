@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+  
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RAUL LOPEZ RAMÍREZ</title>
@@ -16,13 +17,12 @@
 <body>
   <header class="header">
     <img src="img/logo.png" alt="Logo de la escuela" class="logo-img" />
-    <div class="logo">Raul López Ramírez</div>
+    <div class="logo"> Secundaria Raul López Ramírez</div>
     <nav class="nav">
       <ul>
+        <li>Inicio</li>
+        <li>Oferta Educativa</li>
         <li>Nosotros</li>
-        <li>Experiencia</li>
-        
-        <li>Admisiones</li>
         <li>Blog</li>
         
       </ul>
@@ -49,22 +49,69 @@
     </section>
 
     <!-- Galería tipo collage -->
-    <section class="galeria-custom">
-      <img src="img/images.jpeg" alt="Estudiantes caminando" class="img1" data-aos="zoom-in">
-      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes usando laptop" class="img2" data-aos="zoom-in" data-aos-delay="100">
-      <img src="img/escuelas.jpg" alt="Estudiantes laboratorio" class="img3" data-aos="zoom-in" data-aos-delay="200">
-      <img src="img/images (1).jpeg" alt="Estudiantes en viaje" class="img4" data-aos="zoom-in" data-aos-delay="300">
-      <img src="img/escuelas.jpg" alt="Estudiantes en radio" class="img5" data-aos="zoom-in" data-aos-delay="400">
-      <img src="img/images.jpeg" alt="Estudiantes biblioteca" class="img6" data-aos="zoom-in" data-aos-delay="500">
-      <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes en clase" class="img7" data-aos="zoom-in" data-aos-delay="600">
-    </section>
+    <div class="galeria-scroll-wrapper">
+      <div class="galeria-scroll-track"> <section class="galeria-custom" data-original="true"> <img src="img/images.jpeg" alt="Estudiantes caminando" class="img1">
+              <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes usando laptop" class="img2">
+              <img src="img/escuelas.jpg" alt="Estudiantes laboratorio" class="img3">
+              <img src="img/images (1).jpeg" alt="Estudiantes en viaje" class="img4">
+              <img src="img/escuelas.jpg" alt="Estudiantes en radio" class="img5">
+              <img src="img/images.jpeg" alt="Estudiantes biblioteca" class="img6">
+              <img src="img/escuelas-desigualdad-capital-humano-coronavirus-covid-19-min.jpeg" alt="Estudiantes en clase" class="img7">
+          </section>
+          </div>
+  </div>
   </main>
 
   <!-- JS personalizado -->
-  <script src="script.js"></script>
+  <script src="script.js">
+    document.addEventListener("DOMContentLoaded", function() {
+  const track = document.querySelector(".galeria-scroll-track");
+  const originalGallery = document.querySelector(".galeria-custom[data-original='true']");
+
+  if (!track || !originalGallery) {
+    console.error("Elementos de la galería no encontrados.");
+    return;
+  }
+
+  // --- Configuración ---
+  const cloneCount = 4; // Número de clones (ajusta según necesites para llenar el espacio + loop)
+  const animationDuration = 60; // Duración en segundos para un ciclo completo (ajusta la velocidad)
+  // --------------------
+
+  let galleryWidth = originalGallery.offsetWidth + 15; // Ancho del grid + gap derecho
+
+  // Clonar la galería
+  for (let i = 0; i < cloneCount; i++) {
+    const clone = originalGallery.cloneNode(true);
+    clone.removeAttribute("data-original"); // Quitar el marcador del clon
+    track.appendChild(clone);
+  }
+
+  // Animación con GSAP
+  let tween = gsap.to(track, {
+    x: () => -(galleryWidth * cloneCount) + "px", // Mueve el track la distancia de los clones
+    ease: "none", // Movimiento lineal constante
+    duration: animationDuration * cloneCount, // Duración total ajustada por clones
+    repeat: -1, // Repetir infinitamente
+    // Modificador para resetear la posición y crear el bucle "infinito"
+    modifiers: {
+      x: gsap.utils.unitize(x => parseFloat(x) % galleryWidth) // Asegura que el valor x se reinicie
+    }
+  });
+
+  // Opcional: Pausar al pasar el ratón
+  const wrapper = document.querySelector(".galeria-scroll-wrapper");
+  if (wrapper) {
+    wrapper.addEventListener("mouseenter", () => tween.pause());
+    wrapper.addEventListener("mouseleave", () => tween.play());
+  }
+
+});
+  </script>
 
   <!-- AOS JS -->
   <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script>
     AOS.init();
   </script>
@@ -78,7 +125,7 @@
       <div class="footer-section">
         <h3>NAVEGACIÓN RÁPIDA</h3>
         <ul>
-          <li><a href="#">Acerca de</a></li>
+          <li><a href="#">Nosotros</a></li>
           <li><a href="#">Noticias</a></li>
           <li><a href="#">Eventos</a></li>
           <li><a href="#">Admisiones</a></li>

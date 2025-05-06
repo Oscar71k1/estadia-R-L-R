@@ -1,3 +1,4 @@
+/* Estilos generales */
 * {
   margin: 0;
   padding: 0;
@@ -17,15 +18,21 @@ body {
   color: #ffffff;
   padding: 10px 10px;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;    /* Centra verticalmente */
+  gap: 40px;              /* Espacio entre elementos */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .logo-img {
   width: 55px;
   height: auto;
+}
+
+.logo { /* Estilo para el texto del logo "Raul López Ramírez" */
+  font-size: 1.2rem; /* Ajusta el tamaño si es necesario */
+  font-weight: bold;
+  color: #ffffff; /* Asegura color blanco */
 }
 
 .nav ul {
@@ -98,29 +105,64 @@ body {
   font-weight: bold;
 }
 
-/* Galería tipo collage */
-.galeria-custom {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, 200px);
-  gap: 15px;
-  max-width: 60%;
-  background-color: #f5faff;
+/* --- Galería tipo collage CON SCROLL (Implementación con JS/GSAP) --- */
+
+/* Contenedor que define el área visible y oculta el desbordamiento */
+.galeria-scroll-wrapper {
+  max-width: 50%; /* Ancho del área visible del carrusel */
   margin: 40px auto;
-  padding: 0 20px;
-  
+  overflow: hidden; /* Oculta lo que se sale */
+  background-color: #f5faff; /* Mantiene el fondo */
+  padding: 20px 0; /* Espaciado vertical */
+  position: relative; /* Útil si añades overlays o máscaras */
+
+  /* Opcional: Máscara para difuminar los bordes y que se vea mejor el loop */
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
 }
 
+/* Contenedor interno que JS llenará con el original y los clones */
+.galeria-scroll-track {
+  display: flex; /* Coloca las galerías (original y clones) en línea */
+  width: max-content; /* Ancho se ajusta al contenido (varias galerías) */
+  /* La animación la aplica GSAP directamente al style.transform */
+  will-change: transform; /* Ayuda al navegador a optimizar la animación */
+}
+
+/* Estilos del bloque de la galería original (y sus clones) */
+.galeria-custom {
+  /* MANTIENE TU DISEÑO DE GRID ORIGINAL */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  grid-template-rows: repeat(3, 200px); /* 3 filas de 200px de alto */
+  gap: 15px; /* Espacio entre celdas */
+  width: 660px; /* DEFINE UN ANCHO FIJO para el bloque del grid. ¡AJUSTA ESTO! */
+                /* Debe ser suficientemente grande para tu grid de 4 columnas */
+                /* Es crucial para el cálculo de la animación en JS */
+
+  /* Propiedades para que funcione dentro del track flex */
+  flex-shrink: 0; /* Evita que el grid se encoja */
+  margin-right: 15px; /* Espacio entre bloques de galería (original/clones) */
+
+  /* Quitar estilos que ahora controla el wrapper o no aplican */
+  /* max-width: 60%; NO */
+  /* margin: 40px auto; NO */
+  /* padding: 0 20px; NO (El padding va en el wrapper si acaso) */
+  background-color: transparent; /* El fondo está en el wrapper */
+}
+
+/* Estilos de las imágenes DENTRO del grid */
 .galeria-custom img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Cubre la celda manteniendo proporción */
   border-radius: 11px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block; /* Asegura que no haya espacio extra bajo la imagen */
+  /* transition: ...; -> Quitar la transición CSS si usas GSAP para hover o si interfiere */
 }
 
-/* Posiciones específicas para el collage */
+/* Mantiene las posiciones específicas de tu collage */
 .img1 { grid-column: 1 / 3; grid-row: 1 / 2; }
 .img2 { grid-column: 3 / 4; grid-row: 1 / 2; }
 .img3 { grid-column: 4 / 5; grid-row: 1 / 2; }
@@ -129,14 +171,24 @@ body {
 .img6 { grid-column: 1 / 3; grid-row: 3 / 4; }
 .img7 { grid-column: 3 / 5; grid-row: 3 / 4; }
 
-/* Hover effect */
+/* Hover effect para las imágenes individuales (opcional con JS) */
+/* Si quieres mantener el hover CSS: */
 .galeria-custom img:hover {
   transform: scale(1.03);
   box-shadow: 0 8px 20px rgba(0, 168, 232, 0.3);
+  z-index: 2; /* Para que se vea por encima de otras al escalar */
+  position: relative; /* Necesario para z-index */
 }
+/* ------------------------------------------------------------ */
+
 
 /* Responsive */
 @media (max-width: 768px) {
+  .header {
+    flex-direction: column; /* Apila elementos en móvil */
+    gap: 15px;
+  }
+
   .hero {
     flex-direction: column;
     align-items: center;
@@ -145,42 +197,64 @@ body {
   .nav ul {
     flex-direction: column;
     gap: 10px;
-    text-align: right;
+    text-align: center; /* Centra menú en móvil */
+  }
+
+  .galeria-scroll-wrapper {
+     max-width: 100%; /* Ocupa todo el ancho */
+     padding: 10px 0;
+     margin: 20px auto;
+     /* Quitar máscara en móvil si se ve mal */
+     /* -webkit-mask-image: none; */
+     /* mask-image: none; */
   }
 
   .galeria-custom {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: auto;
+    /* Ajustar tamaño del grid en móvil */
+    width: 600px; /* Ancho fijo menor, ¡AJUSTA! */
+    grid-template-rows: repeat(3, 150px); /* Filas más bajas */
+    gap: 10px;
+    margin-right: 10px;
   }
 
-  .img1, .img2, .img3, .img4, .img5, .img6, .img7 {
-    grid-column: auto !important;
-    grid-row: auto !important;
+  /* Footer responsive (igual que antes) */
+   .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
   }
-  .footer {
-    background-color: #1a1a35;
-    color: #fff;
-    padding: 40px 20px 20px;
-    font-family: 'Arial', sans-serif;
-  }
-  .footer-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: auto;
-  }  
-}
 
+  .footer-section {
+    min-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .footer-section.logo {
+     align-items: center;
+     flex-basis: auto;
+  }
+
+  .footer-section h3 {
+     margin-bottom: 8px;
+  }
+
+  .footer-section p {
+     font-size: 0.9rem;
+  }
+  .footer-bottom {
+    font-size: 0.75rem;
+  }
+} /* Fin de @media */
+
+
+/* Footer (igual que antes) */
 .footer {
   background-color: #00171f;
   color: #ffffff;
-  /* Reducimos padding superior e inferior */
   padding: 25px 20px 15px;
   font-family: Arial, sans-serif;
-  /* Podemos reducir un poco el interlineado si se ve muy separado */
   line-height: 1.5;
-  max-height: 250px;
 }
 
 .footer-container {
@@ -189,45 +263,33 @@ body {
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto 15px auto;
-  gap: 20px 30px; 
+  gap: 20px 30px;
 }
 
 .footer-section {
   flex: 1;
-  min-width: 180px; 
+  min-width: 180px;
   margin-bottom: 15px;
 }
 
 
 .footer-section.logo {
-  flex-basis: 220px; 
+  flex-basis: 220px;
   flex-grow: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-logo {
-  width: 200px; 
+  width: 150px;
   height: auto;
-  margin: -20px;
-  margin-bottom: 8px; 
 }
-
-.footer-section.logo h2 {
-  margin: 0;
-  font-size: 1.6rem; 
-  color: #ffffff;
-}
-
-.footer-section.logo p {
-  margin: 0;
-  font-size: 0.9rem; 
-  color: #ffffff;
-}
-
 
 .footer-section h3 {
-  font-size: 1rem; 
+  font-size: 1rem;
   color: #00a8e8;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -240,14 +302,14 @@ body {
 }
 
 .footer-section ul li {
-  margin-bottom: 8px; 
+  margin-bottom: 8px;
 }
 
 .footer-section ul li a {
   color: #ffffff;
   text-decoration: none;
   transition: color 0.3s ease;
-  font-size: 0.9rem; 
+  font-size: 0.9rem;
 }
 
 .footer-section ul li a:hover {
@@ -257,22 +319,21 @@ body {
 
 
 .footer-section p {
-  margin-bottom: 5px; 
-  font-size: 0.85rem; 
+  margin-bottom: 5px;
+  font-size: 0.85rem;
   color: #ffffff;
-  line-height: 1.4; 
+  line-height: 1.4;
 }
 
 
 .footer-bottom {
   text-align: center;
-  
   padding-top: 15px;
   margin-top: 10px;
   border-top: 1px solid #003459;
-  font-size: 0.8rem; 
+  font-size: 0.8rem;
   color: #ffffff;
-  line-height: 1.5; 
+  line-height: 1.5;
 }
 
 .footer-bottom a {
@@ -286,41 +347,14 @@ body {
   text-decoration: underline;
 }
 
-
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column;
-    align-items: center; 
-    text-align: center;   
-    gap: 15px; 
-  }
-
-  .footer-section {
-    min-width: 100%;
-    margin-bottom: 20px; 
-  }
-
-  .footer-section.logo {
-     align-items: center;
-     flex-basis: auto;
-  }
-
-  .footer-section h3 {
-     margin-bottom: 8px;
-  }
-
-   
-   .footer-section p {
-     font-size: 0.9rem; 
-   }
-   .footer-bottom {
-    font-size: 0.75rem; 
-   }
+/* Estilos para los iconos de redes sociales */
+.social-links {
+  display: flex;
+  align-items: center;
 }
 
 .social-links img {
   width: 30px;
   height: 30px;
-  margin-right: 10px;
-  
+  margin-left: 10px; /* Cambiado a margin-left para espaciar */
 }
